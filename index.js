@@ -5,8 +5,8 @@ var https = require('https');
 var url = require('url');
 
 function agent(options) {
-	// if defaultMaxSockets is Infinity - then we should use default agent
-	if (http.Agent.defaultMaxSockets === Infinity) {
+	// if defaultMaxSockets is not default 5 - then we should use default agent
+	if (http.Agent.defaultMaxSockets !== 5) {
 		return undefined;
 	}
 
