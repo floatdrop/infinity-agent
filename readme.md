@@ -21,11 +21,11 @@ https.get('http://google.com', { agent: agent('https://google.com') });
 
 Returns instance of HTTP/HTTPS agent, based on `options`.
 
-This what `agent` could return:
+If `http.Agent.defaultMaxSockets` is set by user (not equals default `5`), then `undefined` will be returned.
 
- * `undefined`, if http.Agent.defaultMaxSockets is not `5`
- * `agent.httpAgent`, if `options.protocol === 'http:'` (`agent.httpsAgent` otherwise)
- * New instance of HTTPS agent with `options`, if they contains any of [tls options](http://nodejs.org/api/tls.html#tls_tls_connect_options_callback)
+Otherwise `agent.httpAgent` / `agent.httpsAgent` will be returned (based on `options.protocol`).
+
+If `options` contains any of [tls options](http://nodejs.org/api/tls.html#tls_tls_connect_options_callback), then new instance of `https.Agent` will be returned (with `maxSockets` set to `Infinity`, if not present in `options`).
 
 #### options  
 _Required_  
