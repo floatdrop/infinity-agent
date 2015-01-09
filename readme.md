@@ -21,7 +21,7 @@ Returns instance of HTTP/HTTPS agent, based on `options`.
 
 This what `agent` could return:
 
- * `undefined`, if http.Agent.defaultMaxSockets is `Infinity`
+ * `undefined`, if http.Agent.defaultMaxSockets is not `5`
  * `agent.httpAgent`, if `options.protocol === 'http:'` (`agent.httpsAgent` otherwise)
  * New instance of HTTPS agent with `options`, if they contains any of [tls options](http://nodejs.org/api/tls.html#tls_tls_connect_options_callback)
 
