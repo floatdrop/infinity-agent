@@ -16,9 +16,7 @@ function agent(options) {
 		options = url.parse(options);
 	}
 
-	var proto = options.protocol === 'https:' ? https : http;
-
-	if (proto === http) {
+	if (options.protocol === 'http:') {
 		return agent.httpAgent;
 	}
 
