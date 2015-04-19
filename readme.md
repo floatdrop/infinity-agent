@@ -2,7 +2,7 @@
 
 Returns HTTP/HTTPS agent with maxSockets set to Infinity (based on URL or options).
 
-__Motivation__: Node 0.10.x is using 5 sockets limit per one host: port pair, but in 0.12.x this is fixed with defaultMaxSockets set to Infinity. To backport this behaviour you can use this module.
+__Motivation__: Node 0.10.x is using 5 sockets limit per one host:port pair, but in 0.12.x this is fixed with defaultMaxSockets set to Infinity. To backport this behaviour you can use this module.
 
 ## Usage
 
