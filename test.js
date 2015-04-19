@@ -3,40 +3,26 @@
 'use strict';
 
 var agent = require('./index');
-var assert = require('assert');
 
-if (process.version.indexOf('v0.10') === 0) {
-	it('should return agent.httpAgent for HTTP requests', function () {
-		assert.equal(agent.httpAgent, agent('http://google.com'));
-	});
+var http = require('http');
+var https = require('https');
 
-	it('should return agent.httpsAgent for HTTPS requests', function () {
-		assert.equal(agent.httpsAgent, agent('https://google.com'));
+it('should make request with new http agent', function (done) {
+	http.get({host: 'www.google.com', agent: agent.http.globalAgent}, function (res) {
+		res
+			.once('data', function () {
+				done();
+			})
+			.on('error', done);
 	});
+});
 
-	it('should return undefined, if default maxSockets is Infinity', function () {
-		require('http').Agent.defaultMaxSockets = Infinity;
-		assert.equal(undefined, agent('https://google.com'));
-		require('http').Agent.defaultMaxSockets = 5;
+it('should make request with new https agent', function (done) {
+	https.get({protocol: 'https:', host: 'www.google.com', agent: agent.https.globalAgent}, function (res) {
+		res
+			.once('data', function () {
+				done();
+			})
+			.on('error', done);
 	});
-
-	it('should return new agent, if tls options present', function () {
-		var a = agent({protocol: 'https:', ca: 'wat'});
-		assert.notEqual(agent.httpsAgent, a);
-		assert.equal(a.maxSockets, Infinity);
-	});
-} else {
-	it('should return undefined for HTTP requests', function () {
-		assert.equal(undefined, agent('http://google.com'));
-	});
-
-	it('should return undefined for HTTPS requests', function () {
-		assert.equal(undefined, agent('https://google.com'));
-	});
-
-	it('should return agent.httpsAgent, if maxSockets is 5', function () {
-		require('http').Agent.defaultMaxSockets = 5;
-		assert.equal(agent.httpsAgent, agent('https://google.com'));
-		require('http').Agent.defaultMaxSockets = Infinity;
-	});
-}
+});
