@@ -2,7 +2,7 @@
 
 Returns HTTP/HTTPS agent with maxSockets set to Infinity (based on URL or options).
 
-__Motivation__: Node 0.10.x is using 5 sockets limit on one host:port pair, but in 0.12.x this is fixed with defaultMaxSockets set to Infinity. To backport this behaviour you can use this module.
+__Motivation__: Node 0.10.x is using 5 sockets limit per one host:port pair, but in 0.12.x this is fixed with defaultMaxSockets set to Infinity. To backport this behaviour you can use this module.
 
 ## Usage
 
@@ -25,7 +25,7 @@ If `http.Agent.defaultMaxSockets` is set by user (not equals default `5`), then 
 
 Otherwise `agent.httpAgent` / `agent.httpsAgent` will be returned (based on `options.protocol`).
 
-If `options` contains any of [tls options](http://nodejs.org/api/tls.html#tls_tls_connect_options_callback), then new instance of `https.Agent` will be returned (with `maxSockets` set to `Infinity`, if not present in `options`).
+If `options` contains any of [tls options](http://nodejs.org/api/tls.html#tls_tls_connect_options_callback), new instance of `https.Agent` will be returned (with `maxSockets` set to `Infinity`, if not present in `options`).
 
 #### options  
 _Required_  
