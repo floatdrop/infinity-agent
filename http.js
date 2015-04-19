@@ -127,6 +127,13 @@ Agent.prototype.addRequest = function(req, options) {
     };
   }
 
+  // If we are not keepAlive agent and maxSockets is Infinity
+  // then disable shouldKeepAlive
+  if (!this.keepAlive && !Number.isFinite(this.maxSockets)) {
+    req._last = true;
+    req.shouldKeepAlive = false;
+  }
+
   var name = this.getName(options);
   if (!this.sockets[name]) {
     this.sockets[name] = [];
