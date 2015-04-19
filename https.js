@@ -6,12 +6,16 @@ var util = require('util');
 var inherits = util.inherits;
 
 var debug;
-if (process.env.NODE_DEBUG && /http/.test(process.env.NODE_DEBUG)) {
-  debug = function(x) { console.error('HTTPS: %s', x); };
-} else {
-  debug = function() { };
-}
 
+if (util.debuglog) {
+  debug = util.debuglog('https');
+} else {
+  debug = function (x) {
+    if (process.env.NODE_DEBUG && /http/.test(process.env.NODE_DEBUG)) {
+      console.error('HTTPS: %s', x);
+    }
+  };
+}
 function createConnection(port, host, options) {
   if (port !== null && typeof port === 'object') {
     options = port;

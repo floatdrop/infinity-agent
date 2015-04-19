@@ -5,10 +5,15 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 var debug;
-if (process.env.NODE_DEBUG && /http/.test(process.env.NODE_DEBUG)) {
-  debug = function(x) { console.error('HTTP: %s', x); };
+
+if (util.debuglog) {
+  debug = util.debuglog('http');
 } else {
-  debug = function() { };
+  debug = function (x) {
+    if (process.env.NODE_DEBUG && /http/.test(process.env.NODE_DEBUG)) {
+      console.error('HTTP: %s', x);
+    }
+  };
 }
 
 // New Agent code.
