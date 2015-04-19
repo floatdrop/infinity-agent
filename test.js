@@ -3,9 +3,14 @@
 'use strict';
 
 var agent = require('./index');
+var assert = require('assert');
 
 var http = require('http');
 var https = require('https');
+
+it('http.Agent.defaultMaxSockets should be Infinity', function () {
+	assert.equal(agent.http.Agent.defaultMaxSockets, Infinity);
+});
 
 it('should make request with new http agent', function (done) {
 	http.get({host: 'www.google.com', agent: agent.http.globalAgent}, function (res) {
