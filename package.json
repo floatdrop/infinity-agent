@@ -15,7 +15,9 @@
   "author": "Vsevolod Strukchinsky <floatdrop@gmail.com>",
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "http.js",
+    "https.js"
   ],
   "devDependencies": {
     "mocha": "^2.1.0"
