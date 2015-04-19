@@ -1,6 +1,6 @@
 {
   "name": "infinity-agent",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Creates HTTP/HTTPS Agent with Infinity maxSockets",
   "scripts": {
     "test": "mocha -R spec"
